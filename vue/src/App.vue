@@ -72,6 +72,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed, reactive } from 'vue';
+import { useStorage } from './useStorage';
 
 interface Todo {
   id: number;
@@ -103,7 +104,7 @@ export default defineComponent({
       editTitle: '',
     });
 
-    const allTodos = ref<Todo[]>([]);
+    const allTodos = useStorage<Todo[]>('todos', []);
     const activeTodos = computed(() =>
       allTodos.value.filter((todo) => !todo.completed),
     );
